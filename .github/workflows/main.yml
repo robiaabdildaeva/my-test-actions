@@ -1,0 +1,16 @@
+name: Test Workflow Triggered from AWS
+
+# Триггер, который ждет внешнего сигнала
+on:
+  repository_dispatch:
+    types: [run-tests-from-codecommit]
+
+jobs:
+  run-simple-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a message
+        run: |
+          echo "🚀 Тест успешно запущен из AWS CodeCommit!"
+          echo "Получены данные из Lambda:"
+          echo "${{ toJSON(github.event.client_payload) }}"
